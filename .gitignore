@@ -1,0 +1,24 @@
+.env
+**/node_modules/
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# GeoServer runtime data
+geoserver_data/
+
+# System and editor
+.DS_Store
+Thumbs.db
+.vscode/
