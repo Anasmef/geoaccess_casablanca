@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #176b59;
+  --color-brand-dark: #105445;
+  --color-brand-light: #e9f7f0;
+  --color-geo-text: #172b4d;
+  --color-dashboard: #f4f7fb;
+}
+
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}

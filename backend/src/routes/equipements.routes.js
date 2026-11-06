@@ -1,44 +1,24 @@
 
 const express = require("express");
-const pool = require("../config/db");
+
+const equipementsController =
+  require("../controllers/equipements.controller");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    const result = await pool.query(`
-      SELECT
-        id,
-        nom,
-        type,
-        adresse,
-        ST_AsGeoJSON(geom)::json AS geometry
-      FROM equipements
-      ORDER BY id
-    `);
+// Liste de tous les équipements
+router.get("/", equipementsController.getAll);
 
-    const features = result.rows.map((item) => ({
-      type: "Feature",
-      geometry: item.geometry,
-      properties: {
-        id: item.id,
-        nom: item.nom,
-        type: item.type,
-        adresse: item.adresse
-      }
-    }));
+// Recherche spatiale par rayon
+router.get(
+  "/proximite",
+  equipementsController.getProximite
+);
 
-    res.json({
-      type: "FeatureCollection",
-      features
-    });
-  } catch (error) {
-    console.error(error.message);
-
-    res.status(500).json({
-      error: "Erreur de récupération des équipements"
-    });
-  }
-});
+// Statistiques spatiales
+router.get(
+  "/statistiques",
+  equipementsController.getStatistiques
+);
 
 module.exports = router;

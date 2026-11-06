@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: require("path").resolve(__dirname, "../../.env"),
+});
+
 const express = require("express");
 
 const app = express();
@@ -45,6 +49,10 @@ app.get("/api/db-test", async (req, res) => {
 const equipementsRoutes = require(
   "./routes/equipements.routes"
 );
+
+app.use("/api/equipements", equipementsRoutes);
+
+
 
 app.use("/api/equipements", equipementsRoutes);
 
